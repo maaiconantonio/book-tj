@@ -2,6 +2,15 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+use Illuminate\View\Factory;
+use Illuminate\View\FileViewFinder;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Events\Dispatcher;
+use Illuminate\View\Engines\EngineResolver;
+use Illuminate\View\Engines\CompilerEngine;
+use Illuminate\View\Engines\PhpEngine;
+use Illuminate\View\Compilers\BladeCompiler;
+
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__)
 ))->bootstrap();
@@ -22,6 +31,8 @@ date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
+
+$app->configure('database');
 
 // $app->withFacades();
 
@@ -94,6 +105,8 @@ $app->configure('app');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\View\ViewServiceProvider::class);
+$app->alias('view', Illuminate\View\Factory::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +123,31 @@ $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
+});
+
+if (!function_exists('resource_path')) {
+    function resource_path($path = '')
+    {
+        return app()->basePath() . '/resources' . ($path ? '/' . $path : $path);
+    }
+}
+
+$app->singleton('view', function ($app) {
+    $resolver = new EngineResolver;
+
+    $bladeCompiler = new BladeCompiler(new Filesystem, storage_path('framework/views'));
+
+    $resolver->register('blade', function () use ($bladeCompiler) {
+        return new CompilerEngine($bladeCompiler);
+    });
+
+    $resolver->register('php', function () {
+        return new PhpEngine;
+    });
+
+    $finder = new FileViewFinder(new Filesystem, [resource_path('views')]);
+
+    return new Factory($resolver, $finder, new Dispatcher($app));
 });
 
 return $app;
