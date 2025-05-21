@@ -1,18 +1,32 @@
 @extends('layouts.app')
 
-@section('title', 'CRUD Livros')
+@section('title', 'Golden Books - Dashboard')
 
 @section('content')
-    <h1>Cadastro de Livros</h1>
-    <form action="/livros" method="POST" class="mt-4">
-        <div class="mb-3">
-            <label for="titulo" class="form-label">Título</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" required>
-        </div>
-        <div class="mb-3">
-            <label for="autor" class="form-label">Autor</label>
-            <input type="text" class="form-control" id="autor" name="autor" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5>Lista de Livros com Autores e Assuntos</h5>
+        <a href="{{ url('/download/book-details') }}" class="btn btn-info">Download PDF</a>
+    </div>
+    <hr class="my-4" />
+    <table class="table table-striped table-bordered">
+        <thead>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autores</th>
+                <th>Assuntos</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($books as $book)
+                <tr>
+                    <td>{{ $book->id }}</td>
+                    <td>{{ $book->title }}</td>
+                    <td>{{ $book->author_names }}</td>
+                    <td>{{ $book->subject_names }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection

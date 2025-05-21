@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Golden Books')</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/fonts/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="{{ url('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/fonts/bootstrap-icons.min.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/css/select2.min.css') }}" rel="stylesheet">
     <style>
     body {
         display: flex;
@@ -48,11 +49,14 @@
       <a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
         <i class="bi bi-house"></i> Início
       </a>
-      <a href="/livros/criar" class="nav-link {{ request()->is('livros/criar') ? 'active' : '' }}">
+      <a href="/book" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
         <i class="bi bi-book"></i> Livros
       </a>
       <a href="/author" class="nav-link {{ request()->is('author') ? 'active' : '' }}">
         <i class="bi bi-person"></i> Autores
+      </a>
+      <a href="/subject" class="nav-link {{ request()->is('subject') ? 'active' : '' }}">
+        <i class="bi bi-alphabet"></i> Assuntos
       </a>
     </nav>
   </div>
@@ -61,6 +65,40 @@
     @yield('content')
   </main>
 
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url('assets/js/vanilla-masker.min.js') }}"></script>
+  <script src="{{ url('assets/js/jquery.min.js') }}"></script>
+  <script src="{{ url('assets/js/select2.min.js') }}"></script>
+  <script>
+  $(document).ready(function () {
+      $('.select2').select2({
+          width: '100%'
+      });
+  });
+  
+  document.addEventListener('DOMContentLoaded', function () {
+      const price = document.getElementById('price');
+      if (price) {
+          VMasker(price).maskMoney({
+              precision: 2,
+              separator: ',',
+              delimiter: '.',
+              unit: '',
+              zeroCents: false
+          });
+      }
+
+      const year = document.getElementById('publicationYear');
+      if (year) {
+          VMasker(year).maskPattern("9999");
+      }
+
+      const edition = document.getElementById('edition');
+      if (edition) {
+          VMasker(edition).maskPattern("999");
+      }
+  });
+  </script>
+
 </body>
 </html>

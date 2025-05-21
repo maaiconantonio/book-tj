@@ -6,12 +6,18 @@
     "type": "project",
     "require": {
         "php": "^8.1",
+        "barryvdh/laravel-dompdf": "^3.1",
+        "components/jquery": "^3.7",
+        "illuminate/http": "^10.0",
+        "illuminate/routing": "^10.48",
         "illuminate/view": "^10.48",
+        "laravel/helpers": "^1.7",
         "laravel/lumen-framework": "^10.0",
         "twbs/bootstrap": "^5.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
+        "laravel/legacy-factories": "^1.4",
         "mockery/mockery": "^1.4.4",
         "pestphp/pest": "^2.36"
     },
@@ -20,7 +26,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
