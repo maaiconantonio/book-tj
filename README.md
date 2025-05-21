@@ -1,8 +1,10 @@
-# 📚 book-tj
+# 📚 Golden Books
 
-**book-tj** é uma aplicação web desenvolvida em [Lumen](https://lumen.laravel.com/) com interface construída usando [Blade](https://laravel.com/docs/11.x/blade) e [Bootstrap](https://getbootstrap.com/), com banco de dados PostgreSQL. O projeto tem como objetivo demonstrar um sistema simples de **cadastro de livros**, sendo utilizado como parte da apresentação de um teste técnico.
+**Golden Books** é uma aplicação web desenvolvida em [Lumen](https://lumen.laravel.com/) com interface construída usando [Blade](https://laravel.com/docs/11.x/blade) e [Bootstrap](https://getbootstrap.com/), com banco de dados PostgreSQL. O projeto tem como objetivo demonstrar um sistema simples de **cadastro de livros**, sendo utilizado como parte da apresentação de um teste técnico.
 
 ## 🚀 Tecnologias Utilizadas
+
+- [dompdf/dompdf](https://github.com/dompdf/dompdf) — geração de relatórios em PDF
 
 - [PHP 8+](https://www.php.net/)
 - [Lumen](https://lumen.laravel.com/)
@@ -47,6 +49,8 @@
 
    ```bash
    php artisan migrate
+   
+   > Este comando executa as **migrations** utilizadas para gerar automaticamente as tabelas e as views necessárias no banco de dados PostgreSQL.
    ```
 
 5. **Inicie o servidor local:**
