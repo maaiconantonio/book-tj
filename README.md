@@ -71,6 +71,14 @@ Se os testes estiverem configurados com [Pest](https://pestphp.com/) ou PHPUnit,
 ./vendor/bin/phpunit
 ```
 
+## 🐳 Docker (opcional)
+
+Caso prefira utilizar o projeto com Docker, você pode acessar o repositório complementar:
+
+- 🔗 [maaiconantonio/docker-lumen](https://github.com/maaiconantonio/docker-lumen)
+
+Este repositório contém a estrutura pronta para subir o ambiente com Docker e Docker Compose, facilitando a execução e configuração do projeto.
+
 ## 🗂️ Funcionalidades
 
 - Cadastro, edição e exclusão de livros
@@ -82,7 +90,7 @@ Se os testes estiverem configurados com [Pest](https://pestphp.com/) ou PHPUnit,
 ## 📁 Estrutura do Projeto
 
 ```plaintext
-book-tj/
+Golden Books/
 ├── app/               # Código principal (Models, Views, Controllers)
 ├── bootstrap/         # Arquivo de inicialização
 ├── config/            # Configurações da aplicação
